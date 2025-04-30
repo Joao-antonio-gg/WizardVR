@@ -397,6 +397,8 @@ MonoBehaviour:
   movementSource: {fileID: 1514366871}
   newPositionThreshold: 0.05
   debugCubePrefab: {fileID: 5055273726209911552, guid: 31bb4a9b6891d2d4bbd09e29518c87f8, type: 3}
+  creationMode: 1
+  newGestureName: 
 --- !u!1 &1195202172
 GameObject:
   m_ObjectHideFlags: 0
