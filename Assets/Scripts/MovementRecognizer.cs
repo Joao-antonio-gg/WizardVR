@@ -99,6 +99,7 @@ public class MovementRecognizer : MonoBehaviour
             if (result.Score > gestureRecognitionThreshold) // Check if the score is above the threshold
             {
                 OnGestureRecognized.Invoke(result.GestureClass); // Invoke the event with the recognized gesture class
+                //Debug.Log("Gesture event invoked: " + result.GestureClass);
             }
         }
     }
