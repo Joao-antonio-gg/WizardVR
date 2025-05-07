@@ -12,6 +12,17 @@ public class SpellSpawner : MonoBehaviour
             {
                 GameObject spell = Instantiate(item, spawnPoint.position, spawnPoint.rotation);
                 spell.transform.SetParent(spawnPoint); // Set the parent to the spawn point
+
+                Projectile projectile = spell.GetComponent<Projectile>();
+                if (projectile != null)
+                {
+                    projectile.FireShot();
+                }
+                else
+                {
+                    Debug.LogWarning("The spawned spell does not have a Projectile script attached.");
+                }
+
                 break; // Exit the loop after spawning the spell
             }
         }
