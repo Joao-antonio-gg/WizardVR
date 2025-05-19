@@ -3,20 +3,40 @@ using UnityEngine;
 
 public class SpawnerScript : MonoBehaviour
 {
-    public GameObject prefabToSpawn; // O prefab a ser instanciado
-    public uint enemyCount; // Quantidade atual de inimigos
+    public GameObject prefabToSpawn;
+    public uint enemyCount;
 
-    public int spawnRange = 10; // Raio em torno do spawner para gerar inimigos
+    public int spawnRange = 10;
+    public float activationDistance = 15f;
+    public Transform playerTransform;
 
-    void Start()
+    private bool spawningStarted = false;
+
+    void Update()
     {
-        StartCoroutine(EnemyDrop()); // Inicia a coroutine de spawn
+        if (!spawningStarted && playerTransform != null)
+        {
+            float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
+
+            // Verifica se o jogador acabou de entrar na área de ativação
+            if (distanceToPlayer <= activationDistance)
+            {
+                spawningStarted = true;
+                StartCoroutine(EnemyDrop());
+            }
+        }
     }
 
     IEnumerator EnemyDrop()
     {
         while (enemyCount < 5)
         {
+            if (prefabToSpawn == null)
+            {
+                Debug.LogWarning("Prefab está nulo ou foi destruído.");
+                yield break;
+            }
+
             float xOffset = Random.Range(-spawnRange, spawnRange);
             float zOffset = Random.Range(-spawnRange, spawnRange);
 
@@ -27,8 +47,9 @@ public class SpawnerScript : MonoBehaviour
             );
 
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-            yield return new WaitForSeconds(1f);
             enemyCount += 1;
+
+            yield return new WaitForSeconds(1f);
         }
     }
 }
