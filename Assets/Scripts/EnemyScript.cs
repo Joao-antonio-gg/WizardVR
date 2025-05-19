@@ -33,13 +33,17 @@ public class FollowPlayer : MonoBehaviour
     {
         if (player == null) return;
         player = Camera.main.transform;
-        float distance = Vector3.Distance(transform.position, player.position);
+        Vector3 player_position = player.position;
+        player_position.y = 1;
+        float distance = Vector3.Distance(transform.position, player_position);
+        
+        
         
 
         if (distance > stopDistance)
         {
             // Calcula a direção e move em direção ao jogador
-            Vector3 direction = (player.position - transform.position).normalized;
+            Vector3 direction = (player_position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
 
             // Rotaciona apenas no eixo Y (ignora inclinação vertical)

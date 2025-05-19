@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 3
   tags:
   - Anchor
+  - Magic
+  - Enimy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
