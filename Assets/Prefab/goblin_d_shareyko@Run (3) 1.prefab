@@ -745,7 +745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4476c6a9dbfa9549a35319f65186833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 8138114827996698232, guid: c97ec9a43742b2443bd7b2d78efc4ff8, type: 3}
+  player: {fileID: 917997558447570000, guid: 93aeca320e8c15f47954cd64e43687e6, type: 3}
   speed: 5
   stopDistance: 2
 --- !u!114 &3570296579337093969

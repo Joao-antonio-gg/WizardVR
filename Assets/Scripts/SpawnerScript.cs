@@ -4,13 +4,31 @@ using UnityEngine;
 public class SpawnerScript : MonoBehaviour
 {
     public GameObject prefabToSpawn;
-    public uint enemyCount;
+    public int maxEnemyCount = 5;
 
     public int spawnRange = 10;
     public float activationDistance = 15f;
     public Transform playerTransform;
 
     private bool spawningStarted = false;
+    private int currentEnemyCount = 0;
+
+    void Start()
+    {
+        // Tenta atribuir automaticamente o jogador
+        if (playerTransform == null)
+        {
+            GameObject playerObj = GameObject.FindWithTag("Player");
+            if (playerObj != null)
+            {
+                playerTransform = playerObj.transform;
+            }
+            else
+            {
+                Debug.LogError("Jogador não encontrado! Adicione a tag 'Player' ao jogador.");
+            }
+        }
+    }
 
     void Update()
     {
@@ -18,7 +36,6 @@ public class SpawnerScript : MonoBehaviour
         {
             float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-            // Verifica se o jogador acabou de entrar na área de ativação
             if (distanceToPlayer <= activationDistance)
             {
                 spawningStarted = true;
@@ -29,7 +46,7 @@ public class SpawnerScript : MonoBehaviour
 
     IEnumerator EnemyDrop()
     {
-        while (enemyCount < 5)
+        while (currentEnemyCount < maxEnemyCount)
         {
             if (prefabToSpawn == null)
             {
@@ -37,19 +54,24 @@ public class SpawnerScript : MonoBehaviour
                 yield break;
             }
 
-            float xOffset = Random.Range(-spawnRange, spawnRange);
-            float zOffset = Random.Range(-spawnRange, spawnRange);
-
-            Vector3 spawnPosition = new Vector3(
-                transform.position.x + xOffset,
-                transform.position.y,
-                transform.position.z + zOffset
+            Vector3 randomOffset = new Vector3(
+                Random.Range(-spawnRange, spawnRange),
+                0f,
+                Random.Range(-spawnRange, spawnRange)
             );
 
+            Vector3 spawnPosition = transform.position + randomOffset;
+
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-            enemyCount += 1;
+            currentEnemyCount++;
 
             yield return new WaitForSeconds(1f);
         }
+    }
+
+    // (Opcional) Se quiser decrementar a contagem quando um inimigo morrer:
+    public void OnEnemyDestroyed()
+    {
+        currentEnemyCount = Mathf.Max(0, currentEnemyCount - 1);
     }
 }
