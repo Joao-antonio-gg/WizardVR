@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
@@ -31,8 +32,9 @@ public class FollowPlayer : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-
+        player = Camera.main.transform;
         float distance = Vector3.Distance(transform.position, player.position);
+        
 
         if (distance > stopDistance)
         {
