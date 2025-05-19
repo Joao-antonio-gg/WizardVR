@@ -29,6 +29,9 @@ public class Projectile : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        // Print the name of the object collided with
+        Debug.Log($"Projectile collided with: {collision.gameObject.name}");
+
         // Optional: Add impact effects here (e.g., particles, sound)
 
         // Disable the projectile after it hits something

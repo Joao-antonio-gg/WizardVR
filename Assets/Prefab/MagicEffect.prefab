@@ -9745,7 +9745,7 @@ GameObject:
   - component: {fileID: 2319384772025575332}
   - component: {fileID: 6299362341641363023}
   m_Layer: 0
-  m_Name: Star hit
+  m_Name: MagicEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
