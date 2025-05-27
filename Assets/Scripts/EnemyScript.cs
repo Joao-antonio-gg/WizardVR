@@ -1,12 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class FollowPlayer : MonoBehaviour
 {
     public Transform player;            // Referência ao Transform do jogador
     public float speed = 5f;            // Velocidade do inimigo
     public float stopDistance = 2f;     // Distância para parar de andar e começar a atacar
-
     private Animator animator;          // Referência ao Animator
 
     void Start()
