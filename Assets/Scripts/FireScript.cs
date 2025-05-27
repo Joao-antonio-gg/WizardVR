@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, ISpell
 {
     public float launchForce = 10f;
 
@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
         {
             Debug.LogError("No Rigidbody attached to the projectile!");
         }
+        rb.useGravity = false;
     }
 
     public void FireShot()
@@ -34,7 +35,14 @@ public class Projectile : MonoBehaviour
 
         // Optional: Add impact effects here (e.g., particles, sound)
 
-        // Disable the projectile after it hits something
+        // If collided with XR Rig, do nothing so the projectile keeps going
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.name.Contains("XRRig"))
+        {
+            Debug.Log("Projectile hit the player, ignoring collision.");
+            return;
+        }
+
+        // Disable the projectile after it hits something else
         gameObject.SetActive(false);
     }
 
@@ -47,4 +55,5 @@ public class Projectile : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
+
 }

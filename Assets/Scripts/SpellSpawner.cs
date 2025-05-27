@@ -4,23 +4,36 @@ public class SpellSpawner : MonoBehaviour
 {
     public List<GameObject> spellPrefabs; // List of spell prefabs to spawn
     public Transform spawnPoint; // Point where the spell will be spawned
+    public Transform alternateSpawnPoint; // Alternate spawn point for the spell
 
     public void SpawnSpell(string spellName)
     {
+        // Increase spawnpoint forward position
+        spawnPoint.position += spawnPoint.forward * 0.1f; // In front of the wand
         foreach (var item in spellPrefabs){
             if (item.name == spellName)
             {
-                GameObject spell = Instantiate(item, spawnPoint.position, spawnPoint.rotation);
-                spell.transform.SetParent(spawnPoint); // Set the parent to the spawn point
+                Vector3 position = spawnPoint.position;
+                Quaternion rotation = spawnPoint.rotation; // Default to wand's rotation
 
-                Projectile projectile = spell.GetComponent<Projectile>();
-                if (projectile != null)
+                if (spellName == "Wind") // Replace with your actual AoE spell name
                 {
-                    projectile.FireShot();
+                    // Keep position in front of wand, but flatten the rotation
+                    Vector3 flatForward = new Vector3(spawnPoint.forward.x, 0f, spawnPoint.forward.z).normalized;
+                    rotation = Quaternion.LookRotation(flatForward);
+                }
+
+                GameObject spell = Instantiate(item, position, rotation);
+                //spell.transform.SetParent(spawnPoint); // Set the parent to the spawn point
+
+                ISpell spellScript = spell.GetComponent<ISpell>();
+                if (spellScript != null)
+                {
+                    spellScript.FireShot();
                 }
                 else
                 {
-                    Debug.LogWarning("The spawned spell does not have a Projectile script attached.");
+                    Debug.LogWarning("The spawned spell does not implement ISpell.");
                 }
 
                 break; // Exit the loop after spawning the spell
