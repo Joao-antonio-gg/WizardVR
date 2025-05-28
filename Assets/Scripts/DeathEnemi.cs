@@ -22,7 +22,6 @@ public class DeathEnemi : MonoBehaviour
                 rb.linearVelocity = Vector3.zero;
                 rb.angularVelocity = Vector3.zero;
             }
-
             Destroy(other.gameObject); // destrói o projétil
             
             StartCoroutine(DieAfterAnimation());
