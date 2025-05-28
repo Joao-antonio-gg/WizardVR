@@ -7,7 +7,7 @@ public class WindScript : MonoBehaviour, ISpell
     public float speed = 5f;
     private Vector3 moveDirection;
     private bool isMoving = false;
-    public duration = 0.5f; // Duration of the projectile before it is destroyed
+    public float duration = 0.5f; // Duration of the projectile before it is destroyed
 
     public void FireShot()
     {
