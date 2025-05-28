@@ -19,6 +19,8 @@ public class MovementRecognizer : MonoBehaviour
     public string newGestureName; // Name of the gesture to be created
 
     public float gestureRecognitionThreshold = 0.8f; // Threshold for gesture 
+
+    public string[] gestureFiles;
     
     [System.Serializable]
     public class UnityStringEvent : UnityEvent<string> { } // Custom Unity event for string parameters
@@ -30,10 +32,9 @@ public class MovementRecognizer : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        string[] gestureFiles = Directory.GetFiles(Application.persistentDataPath, "*.xml"); // Get all gesture files in the persistent data path
         foreach (var item in gestureFiles)
         {
-            trainingSet.Add(GestureIO.ReadGestureFromFile(item));
+            trainingSet.Add(GestureIO.ReadGestureFromXML(item));
         }
     }
 
