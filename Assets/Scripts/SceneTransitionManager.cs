@@ -39,7 +39,7 @@ public class SceneTransitionManager : MonoBehaviour
     {
         fadeScreen.FadeOut();
         //Launch the new scene
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(1);
         operation.allowSceneActivation = false;
 
         float timer = 0;

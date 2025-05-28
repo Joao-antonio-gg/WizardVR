@@ -45,7 +45,10 @@ public class GameStartMenu : MonoBehaviour
     public void StartGame()
     {
         HideAll();
-        SceneTransitionManager.singleton.GoToSceneAsync(currentPage);
+        // Here you would typically load the game scene
+        Debug.Log("Starting Game...");
+        Application.LoadLevel(currentPage); // Replace "GameScene" with your actual game scene name
+        
     }
 
     public void HideAll()

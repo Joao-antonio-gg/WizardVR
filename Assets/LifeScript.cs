@@ -1,12 +1,13 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
     public int life = 3;
     public int damageAmount = 1;
 
-    public Renderer overlayRenderer;  // O Renderer do objeto na frente da câmera
-    public float alphaIncrease = 0.2f;  // Quanto aumenta o alpha por dano
+    public Renderer overlayRenderer;
+    public float alphaIncrease = 0.2f;
     private Material overlayMaterial;
     private Color overlayColor;
 
@@ -14,9 +15,9 @@ public class PlayerLife : MonoBehaviour
     {
         if (overlayRenderer != null)
         {
-            overlayMaterial = overlayRenderer.material;  // Cópia instanciada do material
+            overlayMaterial = overlayRenderer.material;
             overlayColor = overlayMaterial.color;
-            overlayColor.a = 0f;  // Começa invisível
+            overlayColor.a = 0f;
             overlayMaterial.color = overlayColor;
         }
     }
@@ -54,7 +55,15 @@ public class PlayerLife : MonoBehaviour
     void Die()
     {
         Debug.Log("Player morreu!");
-        SceneTransitionManager.singleton.GoToSceneAsync(2);
 
+        if (SceneTransitionManager.singleton != null)
+        {
+            SceneTransitionManager.singleton.GoToSceneAsync(2);
+        }
+        else
+        {
+            Debug.LogError("SceneTransitionManager não encontrado! Carregando cena GameOver diretamente.");
+            SceneManager.LoadScene("GameOver");
+        }
     }
 }

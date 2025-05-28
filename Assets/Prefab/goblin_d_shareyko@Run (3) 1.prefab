@@ -855,8 +855,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4687569476237758384, guid: b86fad80f835ff241ad90a68da40aa8e, type: 3}
-  speed: 2
-  stopDistance: 0.4
+  speed: 1
+  stopDistance: 1.2
 --- !u!114 &3570296579337093969
 MonoBehaviour:
   m_ObjectHideFlags: 0
