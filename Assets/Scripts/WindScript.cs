@@ -4,16 +4,17 @@ public class WindScript : MonoBehaviour, ISpell
 {
     public float launchForce = 10f;
 
-    public float speed = 10f;
+    public float speed = 5f;
     private Vector3 moveDirection;
     private bool isMoving = false;
+    public duration = 0.5f; // Duration of the projectile before it is destroyed
 
     public void FireShot()
     {
         // Use the current forward direction (flattened if needed)
         moveDirection = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
         isMoving = true;
-        Destroy(gameObject, 2f); // Destroy after 2 seconds
+        Destroy(gameObject, duration); // Destroy the projectile after a certain duration
     }
 
     void Update()

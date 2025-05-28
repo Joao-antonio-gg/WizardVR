@@ -65,4 +65,23 @@ public class FollowPlayer : MonoBehaviour
                 animator.SetBool("Atack", true);
         }
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Verifica se colidiu com o jogador
+        if (collision.gameObject.CompareTag("Wind"))
+        {
+            // Push goblin back in the opposite direction of the collision contact point
+            if (collision.contacts.Length > 0)
+            {
+                Vector3 contactPoint = collision.contacts[0].point;
+                Vector3 pushDirection = (transform.position - contactPoint).normalized;
+                // Zero out the Y component to keep push on X,Z plane
+                pushDirection.y = 0f;
+                pushDirection = pushDirection.normalized;
+                float pushDistance = 0.8f; // Distância do empurrão
+                transform.position += pushDirection * pushDistance;
+            }
+        }
+    }
 }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8418394799789056257}
   m_Layer: 0
   m_Name: Wind
-  m_TagString: Magic
+  m_TagString: Wind
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
