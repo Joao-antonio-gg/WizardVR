@@ -10,7 +10,7 @@ public class SpellSpawner : MonoBehaviour
     public void SpawnSpell(string spellName)
     {
         // Increase spawnpoint forward position
-        spawnPoint.position += spawnPoint.forward * 0.1f; // In front of the wand
+        spawnPoint.position += spawnPoint.forward * 0.05f; // In front of the wand
         foreach (var item in spellPrefabs){
             if (item.name == spellName)
             {
