@@ -15,7 +15,16 @@ public class DeathEnemi : MonoBehaviour
         if (other.CompareTag("Magic"))
         {
             animator.SetBool("Dead", true); // ativa a animação de morte
-            Destroy(other.gameObject);      // destrói o projétil
+            // Para parar o movimento, se houver um componente Rigidbody
+            Rigidbody rb = GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+
+            Destroy(other.gameObject); // destrói o projétil
+            
             StartCoroutine(DieAfterAnimation());
         }
     }
