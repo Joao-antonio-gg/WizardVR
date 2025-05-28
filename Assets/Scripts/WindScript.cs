@@ -13,6 +13,7 @@ public class WindScript : MonoBehaviour, ISpell
         // Use the current forward direction (flattened if needed)
         moveDirection = new Vector3(transform.forward.x, 0f, transform.forward.z).normalized;
         isMoving = true;
+        Destroy(gameObject, 2f); // Destroy after 2 seconds
     }
 
     void Update()

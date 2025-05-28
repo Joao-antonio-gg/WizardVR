@@ -23,6 +23,9 @@ public class SpellSpawner : MonoBehaviour
                     Vector3 flatForward = new Vector3(spawnPoint.forward.x, 0f, spawnPoint.forward.z).normalized;
                     rotation = Quaternion.LookRotation(flatForward);
 
+                    // Adjust position to be slightly below the wand
+                    position = spawnPoint.position + flatForward * 0.5f; // Adjust as needed
+
                     // Spawn vfx prefab on alternate spawn point
                     if (alternateSpawnPoint != null && windVFXPrefab != null)
                     {
