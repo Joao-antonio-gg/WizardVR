@@ -5,6 +5,7 @@ public class SpellSpawner : MonoBehaviour
     public List<GameObject> spellPrefabs; // List of spell prefabs to spawn
     public Transform spawnPoint; // Point where the spell will be spawned
     public Transform alternateSpawnPoint; // Alternate spawn point for the spell
+    public GameObject windVFXPrefab; // Prefab for the wind spell VFX
 
     public void SpawnSpell(string spellName)
     {
@@ -21,6 +22,14 @@ public class SpellSpawner : MonoBehaviour
                     // Keep position in front of wand, but flatten the rotation
                     Vector3 flatForward = new Vector3(spawnPoint.forward.x, 0f, spawnPoint.forward.z).normalized;
                     rotation = Quaternion.LookRotation(flatForward);
+
+                    // Spawn vfx prefab on alternate spawn point
+                    if (alternateSpawnPoint != null && windVFXPrefab != null)
+                    {
+                        Vector3 vfxPosition = alternateSpawnPoint.position + Vector3.up * 0.8f;
+                        Instantiate(windVFXPrefab, vfxPosition, Quaternion.identity);
+                    }
+
                 }
 
                 GameObject spell = Instantiate(item, position, rotation);
